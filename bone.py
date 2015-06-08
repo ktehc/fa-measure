@@ -67,8 +67,98 @@ def cune(win):
     
     return cune_angle
 
+def meta_tar(win):
+    """1st Metatarsal Angle Calculation"""
+    
+    mt_pt1 = win.getMouse()
+    mt_pt1.draw(win)
+    
+    mt_pt2 = win.getMouse()
+    mt_pt2.draw(win)
 
-def bone_calc(talus_angle,nav_angle,cune_angle,mt=0,pp=0):
+    prox_mt_line = Line(mt_pt1, mt_pt2)
+    prox_mt_line.draw(win)
+
+
+    mt_pt3 = win.getMouse()
+    mt_pt3.draw(win)
+    
+    mt_pt4 = win.getMouse()
+    mt_pt4.draw(win)
+
+    dist_mt_line = Line(mt_pt3, mt_pt4)
+    dist_mt_line.draw(win)
+
+
+    prox_mt_mid = prox_mt_line.getCenter()
+    dist_mt_mid = dist_mt_line.getCenter()
+    
+    mt_la = Line(prox_mt_mid, dist_mt_mid)
+    mt_la.draw(win)
+
+    if dist_mt_mid.x == prox_mt_mid.x:
+        mt_angle = 90
+    else:
+        mt_slope = (dist_mt_mid.y - prox_mt_mid.y)/(dist_mt_mid.x - prox_mt_mid.x)
+        mt_angle = math.degrees(math.atan(mt_slope))
+    
+    print("1st Metatarsal slope =", mt_slope)
+    print("1st Metatarsal angle =", mt_angle)
+    
+    return mt_angle
+
+def prox_phal(win):
+    """Proximal Phalanx Angle Calculation"""
+    
+    pp_pt1 = win.getMouse()
+    pp_pt1.draw(win)
+    
+    pp_pt2 = win.getMouse()
+    pp_pt2.draw(win)
+
+    prox_pp_line = Line(mt_pt1, mt_pt2)
+    prox_pp_line.draw(win)
+
+    pp_pt3 = win.getMouse()
+    pp_pt3.draw(win)
+    
+    pp_pt4 = win.getMouse()
+    pp_pt4.draw(win)
+
+    dist_pp_line = Line(pp_pt3, pp_pt4)
+    dist_pp_line.draw(win)
+
+    prox_pp_mid = prox_pp_line.getCenter()
+    dist_pp_mid = dist_pp_line.getCenter()
+    
+    pp_la = Line(prox_pp_mid, dist_pp_mid)
+    pp_la.draw(win)
+
+    if dist_pp_mid.x == prox_pp_mid.x:
+        pp_angle = 90
+    else:
+        pp_slope = (dist_pp_mid.y - prox_pp_mid.y)/(dist_pp_mid.x - prox_pp_mid.x)
+        pp_angle = math.degrees(math.atan(pp_slope))
+    
+    print("Proximal Phalanx slope =", pp_slope)
+    print("Proximal Phalanx angle =", pp_angle)
+    
+    return pp_angle
+
+
+def bone_calc(talus_angle,nav_angle,cune_angle,mt_angle,pp_angle):
+
+    talus_mt_angle = 90 - (mt_angle - talus_angle)
+    print("Talus-1st Metatarsal Angle =", talus_mt_angle)
+
+    if talus_mt_angle < 0:
+        print("Outward")
+    elif talus_mt_angle > 0:
+        print("Inward")
+    else:
+        print("Aligned")
+        
+    print()
     
     talus_nav_angle = nav_angle - talus_angle
     print()
@@ -94,3 +184,26 @@ def bone_calc(talus_angle,nav_angle,cune_angle,mt=0,pp=0):
         
     print()
 
+    cune_mt_angle = 90 - (mt_angle - cune_angle)
+    print("Cuneiform-1st Metatarsal Angle =", cune_mt_angle)
+
+    if cune_mt_angle < 0:
+        print("Outward")
+    elif cune_mt_angle > 0:
+        print("Inward")
+    else:
+        print("Aligned")
+        
+    print()
+
+    mt_pp_angle = pp_angle - mt_angle
+    print("1st Metatarsal-Proximal Phalanx Angle =", mt_pp_angle)
+    if mt_pp_angle < 0:
+        print("Outward")
+    elif mt_pp_angle > 0:
+        print("Inward")
+    else:
+        print("Aligned")
+
+
+    
