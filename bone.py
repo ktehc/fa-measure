@@ -168,6 +168,139 @@ def prox_phal(win):
     
     return pp_angle
 
+def cal_p(win, talus_angle):
+    """Calcaneal Pitch Calculation"""
+
+    print("Select Calcaneal points.")
+    
+    cal_pt1 = win.getMouse()
+    cal_pt1.draw(win)
+    
+    cal_pt2 = win.getMouse()
+    cal_pt2.draw(win)
+    
+    cal_line = Line(cal_pt1, cal_pt2)
+    cal_line.setFill("pink")
+    cal_line.setWidth(3)
+    cal_line.draw(win)
+
+    cal_slope = (cal_pt2.y - cal_pt1.y)/(cal_pt2.x - cal_pt1.x)
+    cal_angle = math.degrees(math.atan(cal_slope))
+
+    print("Select Tibia points.")
+
+    tib_pt1 = win.getMouse()
+    tib_pt1.draw(win)
+    
+    tib_pt2 = win.getMouse()
+    tib_pt2.draw(win)
+
+    prox_tib_line = Line(tib_pt1, tib_pt2)
+    prox_tib_line.draw(win)
+
+    tib_pt3 = win.getMouse()
+    tib_pt3.draw(win)
+    
+    tib_pt4 = win.getMouse()
+    tib_pt4.draw(win)
+
+    dist_tib_line = Line(tib_pt3, tib_pt4)
+    dist_tib_line.draw(win)
+
+    prox_tib_mid = prox_tib_line.getCenter()
+    dist_tib_mid = dist_tib_line.getCenter()
+    
+    tib_la = Line(prox_tib_mid, dist_tib_mid)
+    tib_la.setFill("green")
+    tib_la.setWidth(3)
+    tib_la.draw(win)
+    
+    if dist_tib_mid.x == prox_tib_mid.x:
+        tib_angle = 90
+    else:
+        tib_slope = (dist_tib_mid.y - prox_tib_mid.y)/(dist_tib_mid.x - prox_tib_mid.x)
+        tib_angle = math.degrees(math.atan(tib_slope))
+        
+    print("Calcaneal Pitch =", 90 - tib_angle + cal_angle)
+
+    talus_cal_angle = cal_angle - talus_angle
+    print("Talo-Calcaneal Angle =", talus_cal_angle)
+
+
+def ratio_overlap(win):
+
+    print("Select Medial Column points.")
+    
+    med_pt1 = win.getMouse()
+    med_pt1.draw(win)
+    
+    med_pt2 = win.getMouse()
+    med_pt2.draw(win)
+
+    med_col = Line(med_pt1, med_pt2)
+    med_col.setFill("purple")
+    med_col.setWidth(3)
+    med_col.draw(win)
+
+    med_dist = math.sqrt(((med_pt2.y - med_pt1.y)**2) +((med_pt2.x - med_pt1.x)**2))
+    
+    print("Select Lateral Column points.")
+
+    lat_pt1 = win.getMouse()
+    lat_pt1.draw(win)
+    
+    lat_pt2 = win.getMouse()
+    lat_pt2.draw(win)
+
+    lat_col = Line(lat_pt1, lat_pt2)
+    lat_col.setFill("blue")
+    lat_col.setWidth(3)
+    lat_col.draw(win)
+
+    lat_dist = math.sqrt(((lat_pt2.y - lat_pt1.y)**2) +((lat_pt2.x - lat_pt1.x)**2))
+
+    med_lat_ratio = (med_dist)/(lat_dist)
+
+    """print("Medial Length =", med_dist)
+    print("Lateral Length =", lat_dist)"""
+    print("Med-Lat Ratio =", med_lat_ratio)
+
+    print("Select Navicular Overlap points.")
+
+    nav_o_pt1 = win.getMouse()
+    nav_o_pt1.draw(win)
+    
+    nav_o_pt2 = win.getMouse()
+    nav_o_pt2.draw(win)
+
+    nav_o_col = Line(nav_o_pt1, nav_o_pt2)
+    nav_o_col.setFill("brown")
+    nav_o_col.setWidth(3)
+    nav_o_col.draw(win)
+
+    nav_o_dist = math.sqrt(((nav_o_pt2.y - nav_o_pt1.y)**2) +((nav_o_pt2.x - nav_o_pt1.x)**2))
+    
+    print("Select Cuboid Overlap points.")
+    
+    cub_o_pt1 = win.getMouse()
+    cub_o_pt1.draw(win)
+    
+    cub_o_pt2 = win.getMouse()
+    cub_o_pt2.draw(win)
+
+    cub_o_col = Line(cub_o_pt1, cub_o_pt2)
+    cub_o_col.setFill("gray")
+    cub_o_col.setWidth(3)
+    cub_o_col.draw(win)
+
+    cub_o_dist = math.sqrt(((cub_o_pt2.y - cub_o_pt1.y)**2) +((cub_o_pt2.x - cub_o_pt1.x)**2))
+
+    overlap = (nav_o_dist)/(cub_o_dist)
+
+    """print("Navicular Length =", nav_o_dist)
+    print("Cuboid Length =", cub_o_dist)"""
+    print("Naviculo-Cuboid Overlap =", overlap)  
+    
 
 def bone_calc(talus_angle,nav_angle,cune_angle,mt_angle,pp_angle):
 
@@ -191,8 +324,10 @@ def bone_calc(talus_angle,nav_angle,cune_angle,mt_angle,pp_angle):
         
     print()
 
-    mt_pp_angle = pp_angle - mt_angle
-    print("1st Metatarsal-Proximal Phalanx Angle =", mt_pp_angle)
+    if pp_angle != 0:
+        mt_pp_angle = pp_angle - mt_angle
+        print("1st Metatarsal-Proximal Phalanx Angle =", mt_pp_angle)
+  
+            
 
 
-    
