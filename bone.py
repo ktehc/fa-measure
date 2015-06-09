@@ -18,6 +18,8 @@ def talus(win):
     talus_pt2.draw(win)
 
     talus_line = Line(talus_pt1, talus_pt2)
+    talus_line.setFill("red")
+    talus_line.setWidth(3)
     talus_line.draw(win)
 
     talus_slope = (talus_pt2.y - talus_pt1.y)/(talus_pt2.x - talus_pt1.x)
@@ -41,6 +43,8 @@ def nav(win):
     nav_pt2.draw(win)
 
     nav_line = Line(nav_pt1, nav_pt2)
+    nav_line.setFill("cyan")
+    nav_line.setWidth(3)
     nav_line.draw(win)
 
     nav_slope = (nav_pt2.y - nav_pt1.y)/(nav_pt2.x - nav_pt1.x)
@@ -63,6 +67,8 @@ def cune(win):
     cune_pt2.draw(win)
 
     cune_line = Line(cune_pt1, cune_pt2)
+    cune_line.setFill("yellow")
+    cune_line.setWidth(3)
     cune_line.draw(win)
 
     cune_slope = (cune_pt2.y - cune_pt1.y)/(cune_pt2.x - cune_pt1.x)
@@ -103,6 +109,8 @@ def meta_tar(win):
     dist_mt_mid = dist_mt_line.getCenter()
     
     mt_la = Line(prox_mt_mid, dist_mt_mid)
+    mt_la.setFill("orange")
+    mt_la.setWidth(3)
     mt_la.draw(win)
 
     if dist_mt_mid.x == prox_mt_mid.x:
@@ -145,6 +153,8 @@ def prox_phal(win):
     dist_pp_mid = dist_pp_line.getCenter()
     
     pp_la = Line(prox_pp_mid, dist_pp_mid)
+    pp_la.setFill("white")
+    pp_la.setWidth(3)
     pp_la.draw(win)
 
     if dist_pp_mid.x == prox_pp_mid.x:
@@ -163,60 +173,26 @@ def bone_calc(talus_angle,nav_angle,cune_angle,mt_angle,pp_angle):
 
     talus_mt_angle = 90 - (mt_angle - talus_angle)
     print("Talus90-1st Metatarsal Angle =", talus_mt_angle)
-
-    if talus_mt_angle < 0:
-        print("Outward")
-    elif talus_mt_angle > 0:
-        print("Inward")
-    else:
-        print("Aligned")
         
     print()
     
     talus_nav_angle = nav_angle - talus_angle
-    print()
     print("Talo-Navicular Angle =", talus_nav_angle)
-    if talus_nav_angle < 0:
-        print("Inward")
-    elif talus_nav_angle > 0:
-        print("Outward")
-    else:
-        print("Aligned")
 
     print()
 
     nav_cune_angle = cune_angle - nav_angle
     print("Naviculo-Cuneiform Angle =", nav_cune_angle)
 
-    if nav_cune_angle < 0:
-        print("Valgus")
-    elif nav_cune_angle > 0:
-        print("Varus")
-    else:
-        print("Aligned")
-        
     print()
 
     cune_mt_angle = 90 - (mt_angle - cune_angle)
     print("90Cuneiform-1st Metatarsal Angle =", cune_mt_angle)
-
-    if cune_mt_angle < 0:
-        print("Outward")
-    elif cune_mt_angle > 0:
-        print("Inward")
-    else:
-        print("Aligned")
         
     print()
 
     mt_pp_angle = pp_angle - mt_angle
     print("1st Metatarsal-Proximal Phalanx Angle =", mt_pp_angle)
-    if mt_pp_angle < 0:
-        print("Outward")
-    elif mt_pp_angle > 0:
-        print("Inward")
-    else:
-        print("Aligned")
 
 
     
