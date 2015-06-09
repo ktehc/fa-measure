@@ -22,12 +22,6 @@ def main():
 
     #Buttons to call bone angles
 
-    color = 'red'
-    
-    txt = Text(Point(width/4,height/4), "Select Talus Points")
-    txt.setTextColor(color)
-    txt.draw(win)
-
     t = bone.talus(win)
     
     print()
@@ -46,10 +40,14 @@ def main():
     
     pp = bone.meta_tar(win)
 
+    print()  
+
     bone.bone_calc(t,n,c,mt,pp)
 
     
     win.getMouse()
+    
     win.close()
+    
 
 main()

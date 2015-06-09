@@ -8,7 +8,9 @@ import math
 
 def talus(win):
     """Talus Angle Calculation"""
-        
+
+    print("Select Talus points.")
+    
     talus_pt1 = win.getMouse()
     talus_pt1.draw(win)
     
@@ -29,6 +31,8 @@ def talus(win):
 
 def nav(win):
     """Navicular Angle Calculation"""
+
+    print("Select Navicular points.")
     
     nav_pt1 = win.getMouse()
     nav_pt1.draw(win)
@@ -49,6 +53,8 @@ def nav(win):
 
 def cune(win):
     """Cuneiform Angle Calculation"""
+
+    print("Select Cuneiform points.")
     
     cune_pt1 = win.getMouse()
     cune_pt1.draw(win)
@@ -69,6 +75,8 @@ def cune(win):
 
 def meta_tar(win):
     """1st Metatarsal Angle Calculation"""
+
+    print("Select proximal points for 1st Metatarsal.")
     
     mt_pt1 = win.getMouse()
     mt_pt1.draw(win)
@@ -79,7 +87,8 @@ def meta_tar(win):
     prox_mt_line = Line(mt_pt1, mt_pt2)
     prox_mt_line.draw(win)
 
-
+    print("Select distal points for 1st Metatarsal.")
+    
     mt_pt3 = win.getMouse()
     mt_pt3.draw(win)
     
@@ -109,6 +118,8 @@ def meta_tar(win):
 
 def prox_phal(win):
     """Proximal Phalanx Angle Calculation"""
+
+    print("Select proximal points for Proximal Phalanx")
     
     pp_pt1 = win.getMouse()
     pp_pt1.draw(win)
@@ -118,6 +129,8 @@ def prox_phal(win):
 
     prox_pp_line = Line(mt_pt1, mt_pt2)
     prox_pp_line.draw(win)
+
+    print("Select distal points for Proximal Phalanx")
 
     pp_pt3 = win.getMouse()
     pp_pt3.draw(win)
