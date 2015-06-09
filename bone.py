@@ -127,7 +127,7 @@ def prox_phal(win):
     pp_pt2 = win.getMouse()
     pp_pt2.draw(win)
 
-    prox_pp_line = Line(mt_pt1, mt_pt2)
+    prox_pp_line = Line(pp_pt1, pp_pt2)
     prox_pp_line.draw(win)
 
     print("Select distal points for Proximal Phalanx")
@@ -162,7 +162,7 @@ def prox_phal(win):
 def bone_calc(talus_angle,nav_angle,cune_angle,mt_angle,pp_angle):
 
     talus_mt_angle = 90 - (mt_angle - talus_angle)
-    print("Talus-1st Metatarsal Angle =", talus_mt_angle)
+    print("Talus90-1st Metatarsal Angle =", talus_mt_angle)
 
     if talus_mt_angle < 0:
         print("Outward")
@@ -177,9 +177,9 @@ def bone_calc(talus_angle,nav_angle,cune_angle,mt_angle,pp_angle):
     print()
     print("Talo-Navicular Angle =", talus_nav_angle)
     if talus_nav_angle < 0:
-        print("Valgus")
+        print("Inward")
     elif talus_nav_angle > 0:
-        print("Varus")
+        print("Outward")
     else:
         print("Aligned")
 
@@ -198,7 +198,7 @@ def bone_calc(talus_angle,nav_angle,cune_angle,mt_angle,pp_angle):
     print()
 
     cune_mt_angle = 90 - (mt_angle - cune_angle)
-    print("Cuneiform-1st Metatarsal Angle =", cune_mt_angle)
+    print("90Cuneiform-1st Metatarsal Angle =", cune_mt_angle)
 
     if cune_mt_angle < 0:
         print("Outward")
